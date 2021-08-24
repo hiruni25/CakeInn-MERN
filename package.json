@@ -1,0 +1,21 @@
+{
+  "name": "cakeinn",
+  "version": "1.0.0",
+  "description": "Full e-commerce site using MERN",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev":"SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
+    "prod":"SET NODE_ENV=PRODUCTION& nodemon backend/server"
+  },
+  "author": "Hiruni Anuththara",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
