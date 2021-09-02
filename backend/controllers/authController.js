@@ -6,6 +6,7 @@ const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
+const { send } = require('process');
 
 // Register a user => /api/v1/register
 exports.registerUser = catchAsyncErrors( async (req, res, next) => {
@@ -133,6 +134,42 @@ exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true,
         user
+    })
+})
+
+// Update/Change Password => /api/v1/password/update
+exports.updatePassword = catchAsyncErrors(async (req, res, next) =>{
+    const user = await User.findById(req.user.id).select('+password');
+
+    // Check previous user password
+    const isMatched = await user.comparePassword(req.body.oldPassword)
+    if(!isMatched) {
+        return next(new ErrorHandler('Old password is incorrect', 400));
+    }
+
+    user.password = req.body.password;
+    await user.save();
+
+    sendToken(user, 200, res)
+})
+
+// Update user profile => /api/v1/profile/update
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+    const newUserData ={
+        name: req.body.name,
+        email: req.body.email
+    }
+
+    // Update avatar: TODO
+
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+        new: true,
+        runValidators: true,
+        userFindAndModify: false
+    })
+
+    res.status(200).json({
+        success: true
     })
 })
 
