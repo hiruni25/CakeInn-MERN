@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const user = require('./user')
+const product = require('./product')
 
-const orderSchema = mongoose.Schenma({
+const orderSchema = mongoose.Schema({
    senderInfo : {
         name: {
             type: String,
@@ -68,9 +69,9 @@ const orderSchema = mongoose.Schenma({
         }
     ],
 
-    deliverAt: {
+    deliverDate: {
         type: Date,
-        required: true
+        //required: true
     },
 
     specialNote: {
@@ -86,7 +87,7 @@ const orderSchema = mongoose.Schenma({
     },
     deliveryCharge: {
         type: Number,
-        required: true,
+        //required: true,
         default: 0.0
     },
     // totalAmmount = itemsPrice + deliveryCharge
