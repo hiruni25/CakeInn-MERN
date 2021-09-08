@@ -3,6 +3,7 @@ const Product = require('../models/product');
 
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
+const order = require('../models/order');
 
 // Create a new order => /api/v1/order/new
 exports.newOrder = catchAsyncErrors(async (req, res, next) => {
@@ -81,3 +82,21 @@ exports.allOrders = catchAsyncErrors(async(req, res, next) => {
         orders
     })
 })
+
+// Update/Process Order => /api/v1/admin/order/:id
+exports.processOrder = catchAsyncErrors(async (req, res, next) => {
+    const order = await Order.findById(req.params.id)
+
+    if(order.orderStatus === 'Delivered') {
+        return next(new ErrorHandler('You have already deliverd this order',400))
+    }
+    
+    order.orderStatus = req.body.status
+
+    await order.save()
+
+    res.status(200).json({
+        success: true
+    })
+})
+
