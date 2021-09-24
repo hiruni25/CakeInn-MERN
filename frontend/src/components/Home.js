@@ -11,7 +11,7 @@ import { useAlert } from 'react-alert'
 const Home = () => {
 
     const alert = useAlert();
-    const distpatch = useDispatch();
+    const dispatch = useDispatch();
 
     const { loading, products, error, productsCount } = useSelector(state => state.products)
 
@@ -21,9 +21,9 @@ const Home = () => {
             return alert.error(error)
         }
 
-        distpatch(getProducts());
+        dispatch(getProducts());
 
-    }, [distpatch, alert, error])
+    }, [dispatch, alert, error])
 
     return (
         <Fragment>
