@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
+import Pagination from 'react-js-pagination'
 
 import MetaData from './layout/MetaData'
 import Product from './product/Product'
@@ -10,10 +11,12 @@ import { useAlert } from 'react-alert'
 
 const Home = () => {
 
+    const [currentPage, setCurrentPage] = useState(1)
+
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { loading, products, error, productsCount } = useSelector(state => state.products)
+    const { loading, products, error, productsCount, resPerPage } = useSelector(state => state.products)
 
     useEffect(() => {
 
@@ -21,9 +24,13 @@ const Home = () => {
             return alert.error(error)
         }
 
-        dispatch(getProducts());
+        dispatch(getProducts(currentPage));
 
-    }, [dispatch, alert, error])
+    }, [dispatch, alert, error, currentPage])
+
+    function setCurrentPageNo(pageNumber) {
+        setCurrentPage(pageNumber)
+    }
 
     return (
         <Fragment>
@@ -44,6 +51,25 @@ const Home = () => {
 
                         </div>
                     </section>
+
+                    {resPerPage <= productsCount && (
+                        <div className="d-flex justify-content-center mt-5">
+                        <Pagination 
+                            activePage={currentPage}
+                            itemsCountPerPage={resPerPage}
+                            totalItemsCount={productsCount}
+                            onChange={setCurrentPageNo}
+                            nextPageText={'Next'}
+                            prevPageText={'Prev'}
+                            firstPageText={'First'}
+                            lastPageText={'Last'}
+                            itemClass="page-item"
+                            linkClass="page-link"
+                        />
+                    </div>
+                    )}
+                    
+
                 </Fragment>
             )}
 
