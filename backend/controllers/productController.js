@@ -26,15 +26,19 @@ exports.getProducts = catchAsyncErrors (async (req, res, next) => {
     const apiFeatures = new APIFeatures(Product.find(), req.query)
         .search()
         .filter()
-        .pagination(resPerPage)
+        
+    let products = await apiFeatures.query;
+    let filteredProductsCount = products.length;
 
-    const products = await apiFeatures.query;
+    apiFeatures.pagination(resPerPage)
+    products = await apiFeatures.query;
 
     //setTimeout(() => { //timeout added to check loading (2000 msecs)
         res.status(200).json({
             success: true,
             productsCount,
             resPerPage,
+            filteredProductsCount,
             products
         })
     //}, 2000);
