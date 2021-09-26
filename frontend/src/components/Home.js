@@ -19,6 +19,7 @@ const Home = ({ match }) => {
     const [currentPage, setCurrentPage] = useState(1)
     const [price, setPrice] = useState([1, 10000])
     const [category, setCategory] = useState('')
+    const [rating, setRating] = useState(0)
 
     const categories = [
         'Birthday',
@@ -44,16 +45,16 @@ const Home = ({ match }) => {
             return alert.error(error)
         }
 
-        dispatch(getProducts(keyword, currentPage, price, category));
+        dispatch(getProducts(keyword, currentPage, price, category, rating));
 
-    }, [dispatch, alert, error, keyword, currentPage, price, category])
+    }, [dispatch, alert, error, keyword, currentPage, price, category, rating])
 
     function setCurrentPageNo(pageNumber) {
         setCurrentPage(pageNumber)
     }
 
     let count = productsCount;
-    if(keyword) {
+    if (keyword) {
         count = filteredProductsCount
     }
 
@@ -99,13 +100,46 @@ const Home = ({ match }) => {
                                                 <ul className="pl-0">
                                                     {categories.map(category => (
                                                         <li
-                                                            style={{cursor:'pointer',
-                                                            listStyleType: 'none'
-                                                        }}
-                                                        key={category}
-                                                        onClick={() => setCategory(category)}
+                                                            style={{
+                                                                cursor: 'pointer',
+                                                                listStyleType: 'none'
+                                                            }}
+                                                            key={category}
+                                                            onClick={() => setCategory(category)}
                                                         >
-                                                            {category} 
+                                                            {category}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+
+                                            </div>
+
+                                            <hr className="my-3" />
+
+                                            <div className="mt-5">
+                                                <h4 className="mb-3">
+                                                    Ratings
+                                                </h4>
+
+                                                <ul className="pl-0">
+                                                    {[5, 4, 3, 2, 1].map(star => (
+                                                        <li
+                                                            style={{
+                                                                cursor: 'pointer',
+                                                                listStyleType: 'none'
+                                                            }}
+                                                            key={star}
+                                                            onClick={() => setRating(star)}
+                                                        >
+                                                            <div className="rating-outer">
+                                                                <div className="rating-inner"
+                                                                    style={{
+                                                                        width: `${star * 20}%`
+                                                                    }}
+                                                                    >
+
+                                                                </div>
+                                                            </div>
                                                         </li>
                                                     ))}
                                                 </ul>
