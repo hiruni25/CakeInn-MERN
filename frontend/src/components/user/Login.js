@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, clearErrors } from "../../actions/userActions";
 
 const Login = ({ history }) => {
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,8 +30,8 @@ const Login = ({ history }) => {
   }, [dispatch, alert, isAuthenticated, error, history]);
 
   const submitHandler = (e) => {
-      e.preventDefault();
-      dispatch(login(email,password))
+    e.preventDefault();
+    dispatch(login(email, password))
   }
 
   return (
@@ -79,7 +80,7 @@ const Login = ({ history }) => {
                   LOGIN
                 </button>
 
-                <Link href="/register" className="float-right mt-3">
+                <Link to="/register" className="float-right mt-3">
                   New User?
                 </Link>
               </form>
