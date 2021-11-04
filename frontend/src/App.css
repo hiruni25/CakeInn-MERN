@@ -27,12 +27,12 @@ body {
 }
 
 nav {
-  background-color: #EEE8AA;
+  background-color: #800000;
   padding: 1rem 1rem;
 }
 
 #search_btn {
-  background-color: #febd69;
+  background-color: #FAF0E6;
 }
 
 .input-group {
@@ -47,7 +47,7 @@ nav {
 
 #login_btn,
 #view_btn {
-  background-color: #febd69;
+  background-color: #FAF0E6;
   padding: 0.4rem 1.8rem;
   font-family: calibri;
 }
@@ -58,7 +58,7 @@ nav {
 }
 
 #cart_count {
-  background-color: #febd69;
+  background-color: #FAF0E6;
   padding: 0.2rem 0.5rem;
   border-radius: 0.2rem;
   color: black;
@@ -80,7 +80,7 @@ nav {
 }
 
 .card-title a:hover {
-  color: #fa9c23;
+  color: #FFA500;
   text-decoration: none;
 }
 
@@ -93,7 +93,7 @@ nav {
 }
 
 #view_btn {
-  background-color: #fa9c23;
+  background-color: #FFA500;
   color: white;
 }
 
@@ -468,16 +468,16 @@ footer {
 
 /* Pagination */
 .page-item.active .page-link {
-  background-color: #fa9c23;
-  border-color: #fa9c23;
+  background-color: #FFA500;
+  border-color: #FFA500;
 }
 
 .page-link {
-  color: #fa9c23;
+  color: #FFA500;
 }
 
 .page-link:hover {
-  color: #fa9c23;
+  color: #FFA500;
 }
 
 /* Admin Sidebar */
