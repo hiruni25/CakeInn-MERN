@@ -51,12 +51,10 @@ export const authReducer = (state = { user: {} }, action) => {
 
         case LOGOUT_FAIL:
             return {
-                loading: false,
-                isAuthenticated: false,
-                user: null,
-                error: action.payload
+                ...state,
+                error:action.payload
             }
-            
+
         case LOGIN_FAIL:
         case REGISTER_USER_FAIL:
             return {
